@@ -1,5 +1,6 @@
 import csv
 import gzip
+import re
 import unicodedata
 from pathlib import Path
 
@@ -148,73 +149,6 @@ def normalize_diacritics_file(filename, outfilename):
         return True
 
 
-def split_corpus_on_symbol(filename, outfilename, symbol=","):
-    """
-    For yoruba blog (and probably bibeli mimo)
-
-    Args: filenames for I/O and symbol to split lines on
-    Returns: writes outputfile
-    :param filename: input file
-    :param outfilename: processed output file to write
-    :param symbol: to split lines on
-    :return: None, with side-effect of writing an outputfile
-    """
-
-    lines = tuple(open(filename, "r", encoding="utf-8"))
-
-    min_words_to_split = 10
-    min_words_in_utt = 5
-
-    with open(outfilename, "w") as f:
-        # split out heavily comma'd text :((
-        for line in lines:
-            if symbol in line:
-                num_words = len(line.split())
-                num_commas = line.count(symbol)
-                curr_comma_position = line.index(symbol)
-                num_words_ahead_of_curr_comma = len(line[0:curr_comma_position].split())
-
-                curr_line = line
-                while num_commas > 0:
-                    if num_words < min_words_to_split:
-                        # print(curr_line.strip())
-                        f.write(curr_line)
-                        break
-                    if num_words >= min_words_to_split:
-                        if (
-                                num_words_ahead_of_curr_comma >= min_words_in_utt
-                                and len(curr_line[curr_comma_position:].split())
-                                >= min_words_in_utt
-                        ):
-                            f.write(curr_line[0:curr_comma_position] + "\n")
-
-                            # update vars
-                            curr_line = curr_line[curr_comma_position + 1:]
-                            num_words = len(curr_line.split())
-                            num_commas = num_commas - 1
-                            if num_commas > 0:
-                                curr_comma_position = curr_line.index(symbol)
-                                num_words_ahead_of_curr_comma = len(
-                                    curr_line[0:curr_comma_position].split()
-                                )
-                            else:
-                                f.write(curr_line)
-                        else:
-                            # ignore too short comma (+= vs = on current comma position)
-                            num_commas = num_commas - 1
-                            if num_commas > 0:  # for say 3 commas
-                                curr_comma_position += (
-                                        curr_line[curr_comma_position + 1:].index(symbol)
-                                        + 1
-                                )
-                                num_words_ahead_of_curr_comma = len(
-                                    curr_line[0:curr_comma_position].split()
-                                )
-                            else:
-                                f.write(curr_line)
-                    else:
-                        f.write(curr_line)
-            else:
-                f.write(line)
-
-
+def strip_tags(text):
+    match = r"<([^>]+)>"
+    return re.compile(match, flags=re.UNICODE).sub(" ", text)
