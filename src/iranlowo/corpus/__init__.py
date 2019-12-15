@@ -1,2 +1,2 @@
 from .corpus import Corpus, DirectoryCorpus
-from .loaders import OweLoader, YorubaBlogCorpus, BBCCorpus, BibeliCorpus
+from .loaders import YorubaCorpusLoader
