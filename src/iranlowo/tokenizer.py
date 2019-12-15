@@ -2,7 +2,7 @@ from functools import lru_cache
 
 import gensim
 
-from iranlowo.corpus.loaders import get_corpus
+from iranlowo.corpus import get_corpus
 from iranlowo.data.small import contains
 
 

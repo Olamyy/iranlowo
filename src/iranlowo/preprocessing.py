@@ -4,7 +4,7 @@ import unicodedata
 from pathlib import Path
 
 
-def is_valid_owé_format(text, n=4, is_file=False, **kwargs):  # Is this really needed? Maybe. Maybe not.
+def is_valid_owe_format(text, n=4, is_file=False, **kwargs):  # Is this really needed? Maybe. Maybe not.
     """
 
     Args:
@@ -21,7 +21,7 @@ def is_valid_owé_format(text, n=4, is_file=False, **kwargs):  # Is this really 
     return len(text) % n == 0
 
 
-def convert_to_owé_format(path, sep=4, outpath=None, to_csv=False, **kwargs):
+def convert_to_owe_format(path, sep=4, outpath=None, to_csv=False, **kwargs):
     """
 
     Args:
@@ -44,7 +44,7 @@ def convert_to_owé_format(path, sep=4, outpath=None, to_csv=False, **kwargs):
 
     # @Todo: Raise an error (or should it be a warning?) if the text is not in the format available at https://github.com/Niger-Volta-LTI/youba-text/blob/master/Owe/youba_proverbs_out.txt.
 
-    assert is_valid_owé_format(text, sep), "The file doesn't seem to have the valid Owé format. You can refer to the documentation on Owé for the correct format."
+    assert is_valid_owe_format(text, sep), "The file doesn't seem to have the valid Owé format. You can refer to the documentation on Owé for the correct format."
 
     def get_chunk(txt, n):
         """

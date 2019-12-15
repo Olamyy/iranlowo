@@ -41,9 +41,9 @@ text = ' '.join(
      "all the instructions on how to"])
 
 token = nltk.word_tokenize(text)
-bigrams = ngrams(token,2)
-trigrams = ngrams(token,3)
-fourgrams = ngrams(token,4)
-fivegrams = ngrams(token,5)
+bigrams = ngrams(token, 2)
+trigrams = ngrams(token, 3)
+fourgrams = ngrams(token, 4)
+fivegrams = ngrams(token, 5)
 
-print(Counter(ngrams(token,5)))
+print(Counter(ngrams(token, 5)))

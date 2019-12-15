@@ -66,27 +66,4 @@ class OweLoader(object):
         self.yo = yo()
 
 
-def get_corpus(name, single=False):
-    yaml = YAML(typ='safe')
-    data = yaml.load(Path('/Users/Olamilekan/Desktop/Machine Learning/OpenSource/iranlowo/src/iranlowo/corpus/corpus.yml'))
-    if name not in data.keys():
-        raise ValueError("Corpus {} does not exist".format(name))
-    else:
-        if not single:
-            return Corpus(path=data[name]).data
-        else:
-            return DirectoryCorpus(path=data[name])
-
-
-def get_corpus_path(name):
-    yaml = YAML(typ='safe')
-    data = yaml.load(Path('corpus.yml'))
-    if name not in data.keys():
-        raise ValueError("Corpus {} does not exist".format(name))
-    else:
-        return data[name]
-
-
-def download(name):
-    pass
 
