@@ -84,7 +84,7 @@ def get_corpus_path(name):
     if name not in data.keys():
         raise ValueError("Corpus {} does not exist".format(name))
     else:
-        return data['name']
+        return data[name]
 
 
 def download(name):

@@ -5,7 +5,7 @@
 url: https://github.com/Niger-Volta-LTI
 download_url: archive/v{version}.tar.gz
 
-package_data={'iranlowo': ['models/yo_adr_bahdanau_lstm_128_1_1_step_100000_release.pt']}
+package_data={'iranlowo': ['models/models/yo_adr_bahdanau_lstm_128_1_1_step_100000_release.pt']}
 versioning="distance",  # we start from 0.0.0 using v{major}.{minor}.0
 
 """

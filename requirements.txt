@@ -1,3 +1,4 @@
+googletrans
 bs4
 configargparse
 torch
